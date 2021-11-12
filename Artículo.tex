@@ -1,0 +1,145 @@
+\documentclass{article}
+\usepackage{hyperref}
+\usepackage[spanish,mexico]{babel}
+\usepackage{titlesec}
+\usepackage{listings}
+\usepackage{color}
+\usepackage{minted}
+
+\titlespacing*{\subsection} {2ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection}{4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\iffalse ++++++++++++
+
+\lstalias[]{ES6}[ECMAScript2015]{JavaScript}
+\lstdefinelanguage{JavaScript}{
+  morekeywords=[1]{break, continue, delete, else, for, function, if, in,
+    new, return, this, typeof, var, void, while, with},
+  % Literals, primitive types, and reference types.
+  morekeywords=[2]{false, null, true, boolean, number, undefined,
+    Array, Boolean, Date, Math, Number, String, Object},
+  % Built-ins.
+  morekeywords=[3]{eval, parseInt, parseFloat, escape, unescape},
+  sensitive,
+  morecomment=[s]{/*}{*/},
+  morecomment=[l]//,
+  morecomment=[s]{/**}{*/}, % JavaDoc style comments
+  morestring=[b]',
+  morestring=[b]"
+}[keywords, comments, strings]
+
+\lstdefinelanguage[ECMAScript2015]{JavaScript}[]{JavaScript}{
+  morekeywords=[1]{await, async, case, catch, class, const, default, do,
+    enum, export, extends, finally, from, implements, import, instanceof,
+    let, static, super, switch, throw, try},
+  morestring=[b]` % Interpolation strings.
+}
+
+\definecolor{mediumgray}{rgb}{0.3, 0.4, 0.4}
+\definecolor{mediumblue}{rgb}{0.0, 0.0, 0.8}
+\definecolor{forestgreen}{rgb}{0.13, 0.55, 0.13}
+\definecolor{darkviolet}{rgb}{0.58, 0.0, 0.83}
+\definecolor{royalblue}{rgb}{0.25, 0.41, 0.88}
+\definecolor{crimson}{rgb}{0.86, 0.8, 0.24}
+
+\lstdefinestyle{JSES6Base}{
+  backgroundcolor=\color{white},
+  basicstyle=\ttfamily,
+  breakatwhitespace=false,
+  breaklines=false,
+  captionpos=b,
+  columns=fullflexible,
+  commentstyle=\color{mediumgray}\upshape,
+  emph={},
+  emphstyle=\color{crimson},
+  extendedchars=true,  % requires inputenc
+  fontadjust=true,
+  frame=single,
+  identifierstyle=\color{black},
+  keepspaces=true,
+  keywordstyle=\color{mediumblue},
+  keywordstyle={[2]\color{darkviolet}},
+  keywordstyle={[3]\color{royalblue}},
+  %numbers=left,
+  numbersep=5pt,
+  numberstyle=\tiny\color{black},
+  rulecolor=\color{black},
+  showlines=true,
+  showspaces=false,
+  showstringspaces=false,
+  showtabs=false,
+  stringstyle=\color{forestgreen},
+  tabsize=2,
+  title=\lstname,
+  upquote=true  % requires textcomp
+}
+
+\lstdefinestyle{JavaScript}{
+  language=JavaScript,
+  style=JSES6Base
+}
+\lstdefinestyle{ES6}{
+  language=ES6,
+  style=JSES6Base
+}
+
+++++++++++ \fi
+
+\begin{document}
+\title{\Large{\textbf{Principios y Patrones de Programación Funcional}}}
+\author{César González}
+\date{11 de Noviembre del 2021}
+\maketitle
+
+
+\pagebreak
+\section*{Resumen}
+Este artículo comienza diciendo la importancia de la programación funcional, posteriormente se explican los bloques básicos de la programación imperativa, luego se explica cómo usar esos mismos bloques en un estilo funcional con ejemplos en JavaScript, mencionando algunos principios y patrones funcionales, después se menciona brevemente qué son los objetos, posteriormente se menciona la testabilidad de los programas funcionales y finalmente se describen dos arquitecturas funcionales, una para aplicaciones de consola y otra para páginas web.
+
+
+\section*{Introducción}
+La programación funcional no es un concepto nuevo. Sus raíces matemáticas (el cálculo lambda) se desarrollaron en la década de 1930 y el primer lenguaje de programación funcional (LISP) fue desarrollado en el año 1958. Sin embargo, este paradigma está captando cada vez más atención. Se escriben libros y se desarrollan librerías para usar patrones funcionales en lenguajes que no son puramente funcionales. Incluso lenguajes orientados a objetos están evolucionando para facilitar el uso de un estilo funcional. Este panorama hubiera sido impensable en los años 90, algo está cambiando.\cite{why-isnt-fp-norm}
+
+Algunas características de la programación funcional son:
+\begin{itemize}
+  \item Es fácil seguir el flujo de datos.
+  \item El código fuente es fácil de modificar.
+  \item El código fuente puede llegar a ser muy simple. ``Una base simple produce código simple en la práctica" – Evan Czaplicki, creador de Elm.\cite{mainstream-elm}
+  \item En una aplicación existente se pueden aplicar patrones funcionales esporádicamente, sin comprometerse a una arquitectura funcional.\cite{skeptics-functional-style}
+\end{itemize}
+
+
+\section*{Programación imperativa}
+Antes de hablar sobre programación funcional hay que hablar sobre programación imperativa por dos motivos principales: para tener un punto de referencia y porque muchos bloques usados para construir programas imperativos también se usan en la programación funcional.
+
+El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes para ser usado de forma imperativa o en un estilo funcional.\cite{why-js}
+
+\subsection*{Datos primitivos y variables}
+
+\subsection*{Operadores}
+
+\subsection*{Funciones}
+
+\subsection*{Estructuras de control y ciclos}
+
+\subsection*{Estructuras de datos}
+Son tipos de datos que contienen otros datos. A mí me gusta llamarlos \textit{datos compuestos}. Las estructuras de datos más comunes en JavaScript, mas no las únicas, son los arreglos y los objetos.
+
+Un arreglo se puede ver como un contenedor de datos ordenados. Los datos se pueden acceder mediante su índice.
+\inputminted{js}{./article-code-examples/array.js}
+
+
+\section*{Programación funcional}
+
+\subsection*{Las funciones también son datos}
+
+
+\pagebreak
+\begin{thebibliography}{99}
+  \bibitem{why-isnt-fp-norm} \href{https://youtu.be/QyJZzq0v7Z4}{Why Isn't Functional Programming the Norm? – Richard Feldman at ClojuTRE 2019}
+  \bibitem{mainstream-elm} \href{https://youtu.be/oYk8CKH7OhE?t=2133}{Let's be mainstream! User focused design in Elm – Evan Czaplicki at Curry On Prague! 2015}
+  \bibitem{skeptics-functional-style} \href{https://youtu.be/oF9XTJoScOE?t=1253}{A Skeptics Guide To Functional Style JavaScript – Jonathan Mills at NEJS CONF 2017}
+  \bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Why Learn Functional Programming in JavaScript? – Eric Elliot}
+\end{thebibliography}
+
+\end{document}

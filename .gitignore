@@ -1,0 +1,4 @@
+*.log
+*.pdf
+*.gz
+node_modules
