@@ -13,6 +13,7 @@ module.exports = {
     },
     "rules": {
         "array-bracket-spacing": [ "error", "always" ],
+        "array-element-newline": [ "error", "consistent" ],
         "semi": [ "error", "never" ],
         "array-bracket-newline": [ "error", { "multiline": true } ],
         "arrow-parens": "error",
