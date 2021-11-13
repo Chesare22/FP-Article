@@ -1,17 +1,16 @@
-/* eslint indent: ["error", 4] */
-/* eslint quote-props: ["error", "always"]*/
-
-module.exports = {
+{
     "env": {
         "node": true,
-        "es2021": true,
+        "es2021": true
     },
     "extends": [ "eslint:recommended" ],
     "parserOptions": {
         "ecmaVersion": "latest",
-        "sourceType": "module",
+        "sourceType": "module"
     },
     "rules": {
+        // Syntax
+        "max-len": ["error", 63],
         "array-bracket-spacing": [ "error", "always" ],
         "array-element-newline": [ "error", "consistent" ],
         "semi": [ "error", "never" ],
@@ -43,16 +42,21 @@ module.exports = {
         "space-infix-ops": "error",
         "space-unary-ops": "error",
         "template-curly-spacing": [ "error", "always" ],
-        "curly": "error",
-        "eqeqeq": "error",
-        "no-floating-decimal": "error",
-        "no-shadow": "error",
-        "no-var": "error",
         "no-useless-computed-key": "error",
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "spaced-comment": "error",
         "comma-dangle": [ "error", "always-multiline" ],
         "quote-props": [ "error", "as-needed" ],
-    },
+
+        // Prevent errors
+        "curly": "error",
+        "eqeqeq": "error",
+        "no-floating-decimal": "error",
+        "no-shadow": "error",
+        "no-var": "error",
+
+        // Only for showcase, not for production code
+        "no-unused-vars":"off"
+    }
 }
