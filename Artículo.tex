@@ -20,6 +20,7 @@
 
 \newcommand{\code}[1]{\tcbox{\texttt{#1}}}
 \newcommand{\codejs}[1]{\tcbox{\lstinline[style=ES6]{#1}}}
+\newcommand{\operator}[2]{\item \textbf{#1} \codejs{#2}:}
 
 \colorlet{lightgray}{gray!20}
 \tcbset{on line, 
@@ -146,7 +147,7 @@
 
 \pagebreak
 \section*{Resumen}
-Este artículo comienza diciendo la importancia de la programación funcional, posteriormente se explican los bloques básicos de la programación imperativa, luego se explica cómo usar esos mismos bloques en un estilo funcional con ejemplos en JavaScript, mencionando algunos principios y patrones funcionales, después se menciona brevemente qué son los objetos, posteriormente se menciona la testabilidad de los programas funcionales y finalmente se describen dos arquitecturas funcionales, una para aplicaciones de consola y otra para páginas web.
+Este artículo comienza diciendo la importancia de la programación funcional, posteriormente se explican los bloques básicos de la programación imperativa, luego se explica cómo usar esos mismos bloques en un estilo funcional con ejemplos en JavaScript, mencionando algunos principios y patrones funcionales, después se menciona brevemente qué son los objetos, posteriormente se menciona cómo son las pruebas unitarias en programas funcionales y finalmente se describen dos arquitecturas funcionales, una para aplicaciones de consola y otra para páginas web.
 
 \section*{Introducción}
 La programación funcional no es un concepto nuevo. Sus raíces matemáticas (el cálculo lambda) se desarrollaron en la década de 1930 y el primer lenguaje de programación funcional (LISP) fue desarrollado en el año 1958. Sin embargo, este paradigma está captando cada vez más atención. Se escriben libros y se desarrollan librerías para usar patrones funcionales en lenguajes que no son puramente funcionales. Incluso lenguajes orientados a objetos están evolucionando para facilitar el uso de un estilo funcional. Este panorama hubiera sido impensable en los años 90, algo está cambiando.\cite{why-isnt-fp-norm}
@@ -163,7 +164,7 @@ Algunas características de la programación funcional son:
 \section*{Programación imperativa}
 Antes de hablar sobre programación funcional hay que hablar sobre programación imperativa por dos motivos principales: para tener un punto de referencia y porque muchos bloques usados para construir programas imperativos también se usan en la programación funcional.
 
-El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes para ser usado de forma imperativa o en un estilo funcional.\cite{why-js}
+El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes\cite{why-js} para ser usado con un estilo imperativo, funcional o híbrido. Este documento no es una exploración exhaustiva de JavaScript, hay detalles deliberadamente ignorados al definir algunas características del lenguaje.
 
 \subsection*{Datos primitivos}
 Los datos primitivos son la unidad de información básica de los programas. En JavaScript los datos primitivos más usados son números, cadenas de caracteres y booleanos. Los números pueden ser enteros o decimales, y negativos o positivos. Las cadenas de caracteres almacenan datos que representan texto y para crearlas se delimitan los caracteres entre un par de comillas dobles \code{\textquotedbl\textquotedbl}. Los booleanos representan \textit{verdadero} o \textit{falso} y son usados principalmente en condicionales, las cuales se explicarán en breve.
@@ -177,7 +178,7 @@ Otra forma de escribir comentarios es delimitando texto con los símbolos \code{
 \end{bclogo}
 
 \subsection*{Variables}
-Por otro lado, las variables son espacios en la memoria del programa que guardan un dato. Para indicar que se quiere crear una variable se usa la palabra \codejs{let} seguida del nombre de la variable. El operador de asignación \codejs{=} indica qué valor va a guardar la variable. Una variable puede ser asignada varias veces.
+Por otro lado, las variables son espacios en la memoria del programa que guardan un dato. Para indicar que se quiere crear una variable se usa la palabra clave \codejs{let} seguida del nombre de la variable. El operador de asignación \codejs{=} indica qué valor guardar en la variable. Una variable puede ser asignada varias veces a lo largo del programa. Se puede acceder al dato guardado en una variable escribiendo el nombre de la variable.
 
 \lstinputlisting[style=ES6]{code/variables.js}
 
@@ -186,13 +187,44 @@ Existen varias formas para presentar los datos de los programas hacia las person
 \end{bclogo}
 
 \subsection*{Operadores}
+Los operadores sirven para indicar una acción relacionada al manejo de datos. Los operadores, excepto el de asignación \code{=}, generan un nuevo dato a partir de datos existentes.
+
+\medskip
+Los operadores aritméticos realizan operaciones con números. Algunos operadores aritméticos en JavaScript son:
+\begin{itemize}
+  \operator{Suma}{+} Si se usa con números, calcula la suma de dos números. Si se usa con cadenas de caracteres, junta las cadenas en una nueva cadena.
+  \operator{Resta}{-} Resta el numero derecho del izquierdo.
+  \operator{Multiplicación}{*} Multiplica dos números.
+  \operator{División}{/} Calcula el \textit{resultado} de dividir el número izquierdo por el derecho.
+  \operator{Resto}{\%} Calcula el \textit{residuo} de dividir el número izquierdo por el derecho.
+\end{itemize}
+\lstinputlisting[style=ES6]{code/operators/arithmetic.js}
+
+\medskip
+Los operadores de comparación determinan la igualdad o desigualdad entre dos valores. Solo pueden generar datos booleanos. Algunos operadores de comparación en JavaScript son:
+\begin{itemize}
+  \operator{Igualdad}{===} Genera \code{true} solamente si los datos son \textit{iguales} entre sí.
+  \operator{Desigualdad}{!==} Genera \code{true} solamente si los datos son \textit{diferentes} entre sí.
+  \operator{Menor que}{<} Genera \code{true} solamente si el número izquierdo es \textit{menor} que el derecho.
+  \operator{Mayor que}{>} Genera \code{true} solamente si el número izquierdo es \textit{mayor} que el derecho.
+\end{itemize}
+\lstinputlisting[style=ES6]{code/operators/comparison.js}
+
+\medskip
+Los operadores lógicos son similares a los operadores de comparación porque generan datos booleanos. Algunos operadores lógicos de JavaScript son:
+\begin{itemize}
+  \operator{AND}{\&\&} Genera \code{true} solamente si ambos datos son \code{true}.
+  \operator{OR}{||} Genera \code{false} solamente si ambos datos son \code{false}.
+  \operator{NOT}{!} Operador que recibe un solo booleano y genera su opuesto. Si recibe \code{true}, genera \code{false} y viceversa.
+\end{itemize}
+\lstinputlisting[style=ES6]{code/operators/logic.js}
 
 \subsection*{Condicionales y ciclos}
 
 \subsection*{Estructuras de datos}
 Son tipos de datos que contienen otros datos. A mí me gusta llamarlos \textit{datos compuestos}. Las estructuras de datos más comunes en JavaScript, mas no las únicas, son los arreglos y los objetos.
 
-Un arreglo se puede ver como un contenedor de datos ordenados. Los datos se pueden acceder mediante su índice. El primer valor del arreglo corresponde al índice 0, el segundo al índice 1 y así sucesivamente. Se puede usar el operador de asignación \code{=} para indicar qué valor guardar en un índice del arreglo.
+Un arreglo se puede ver como una colección de datos ordenados. Los datos se pueden acceder mediante su índice. El primer dato del arreglo corresponde al índice 0, el segundo al índice 1 y así sucesivamente. Se puede usar el operador de asignación \code{=} para indicar qué dato guardar en un índice del arreglo.
 \lstinputlisting[style=ES6]{code/arrays.js}
 
 \subsection*{Funciones}
