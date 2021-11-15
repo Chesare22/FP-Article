@@ -164,10 +164,10 @@ Algunas características de la programación funcional son:
 \section*{Programación imperativa}
 Antes de hablar sobre programación funcional hay que hablar sobre programación imperativa por dos motivos principales: para tener un punto de referencia y porque muchos bloques usados para construir programas imperativos también se usan en la programación funcional.
 
-El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes\cite{why-js} para ser usado con un estilo imperativo, funcional o híbrido. Este documento no es una exploración exhaustiva de JavaScript, hay detalles deliberadamente ignorados al definir algunas características del lenguaje.
+El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes\cite{why-js} para ser usado con un estilo imperativo, funcional o híbrido. Este documento no es una exploración exhaustiva de JavaScript, por simplicidad hay detalles deliberadamente ignorados al definir algunas características del lenguaje.
 
 \subsection*{Datos primitivos}
-Los datos primitivos son la unidad de información básica de los programas. En JavaScript los datos primitivos más usados son números, cadenas de caracteres y booleanos. Los números pueden ser enteros o decimales, y negativos o positivos. Las cadenas de caracteres almacenan datos que representan texto y para crearlas se delimitan los caracteres entre un par de comillas dobles \code{\textquotedbl\textquotedbl}. Los booleanos representan \textit{verdadero} o \textit{falso} y son usados principalmente en condicionales, las cuales se explicarán en breve.
+Los datos primitivos son la unidad de información básica de los programas. En JavaScript los datos primitivos más usados son números, cadenas de caracteres y booleanos. Los números pueden ser enteros o decimales, y negativos o positivos. Las cadenas de caracteres almacenan datos que representan texto y para crearlas se delimitan los caracteres entre un par de comillas dobles c. Los booleanos representan \textit{verdadero} o \textit{falso} y son usados principalmente en condicionales, las cuales se explicarán en breve.
 
 \lstinputlisting[style=ES6]{code/primitives.js}
 
@@ -218,7 +218,61 @@ Los operadores lógicos son similares a los operadores de comparación porque ge
 \end{itemize}
 \lstinputlisting[style=ES6]{code/operators/logic.js}
 
-\subsection*{Condicionales y ciclos}
+\subsection*{Condicionales}
+Quizá te haya sorprendido que se dediquen tantos operadores al manejo de booleanos. Un booleano por sí solo no es muy interesante, su verdadero potencial recae en las condicionales. Las condicionales reciben booleanos para decidir si una secuencia de instrucciones será evaluada o no. La condicional más básica es el bloque \codejs{if}, su sintaxis es la siguiente:
+\lstinputlisting[style=ES6]{code/conditionals/syntax-if.js}
+
+El bloque anterior solamente denota la sintaxis, no es un ejemplo válido de JavaScript porque el bloque \codejs{if} requiere que haya un dato entre los paréntesis. Veamos un ejemplo que sí se pueda ejecutar:
+\lstinputlisting[style=ES6]{code/conditionals/if.js}
+
+Nótese que solo una instrucción de \codejs{console.log} fue evaluada. El programa no escribió \textquotedbl Buenos días\textquotedbl\medspace en la consola porque el booleano recibido en el bloque \codejs{if} era igual a \codejs{false}.
+
+También es posible indicar un bloque que se evaluaría solamente si no se evalúan las instrucciones dentro del \codejs{if}. Tal bloque se conoce como \codejs{else} y su sintaxis es la siguiente:
+\pagebreak
+\lstinputlisting[style=ES6]{code/conditionals/syntax-else.js}
+Un ejemplo de código que usa \codejs{else}:
+\lstinputlisting[style=ES6]{code/conditionals/else.js}
+
+\subsection*{Ciclos}
+Los ciclos son la respuesta a la pregunta ``¿Cómo se puede evaluar una instrucción múltiples veces sin tener que volver a escribirla?" Los ciclos son bloques de código similares a las condicionales porque su evaluación puede depender de un booleano. La diferencia es que los ciclos vuelven a ser evaluados si el booleano es \codejs{true}. El ciclo más básico es el bloque \codejs{while}, su sintaxis es la siguiente:
+\lstinputlisting[style=ES6]{code/cicles/syntax-while.js}
+Por ejemplo, para escribir en la consola múltiples veces el texto \textquotedbl Around the world\textquotedbl\medspace se hace lo siguiente:
+\pagebreak
+\lstinputlisting[style=ES6]{code/cicles/infinite-while.js}
+Este programa evalúa el \codejs{while}, como recibe \codejs{true} escribe \textquotedbl Around the world\textquotedbl\medspace en la consola, luego vuelve a evaluar el \codejs{while}, como recibe \codejs{true} escribe \textquotedbl Around the world\textquotedbl\medspace y así mientras el programa se mantenga prendido, nunca escribe \textquotedbl Inalcanzable\textquotedbl\medspace en la consola.
+
+Se logró el cometido de evaluar una instrucción múltiples veces, pero se desveló un nuevo problema: ¿Cómo evitar que una instrucción se evalúe infinitas veces?. La respuesta es mediante el uso de variables. El booleano que recibe el bloque \codejs{while} puede depender de una variable que es reasignada dentro del ciclo. Veamos un ejemplo:
+\lstinputlisting[style=ES6]{code/cicles/while.js}
+Analicemos paso por paso qué hace este programa:
+\begin{enumerate}
+  \item Se crea la variable \codejs{número} y se le asigna el valor de \codejs{0}
+  \item \codejs{while} recibe \codejs{true} como resultado de \codejs{0 < 3}, por lo que evalúa sus instrucciones:
+  \begin{enumerate}
+    \item Se escribe el dato guardado dentro de \codejs{número} en la consola. Es decir, se escribe \codejs{0} en la consola.
+    \item Se calcula el resultado de \codejs{número + 1} y se le asigna a la variable \codejs{número}. Es decir, a \codejs{número} se le asigna \codejs{1}.
+  \end{enumerate}
+  \item \codejs{while} recibe \codejs{true} como resultado de \codejs{1 < 3}, por lo que evalúa sus instrucciones:
+  \begin{enumerate}
+    \item Se escribe el dato guardado dentro de \codejs{número} en la consola. Es decir, se escribe \codejs{1} en la consola.
+    \item Se calcula el resultado de \codejs{número + 1} y se le asigna a la variable \codejs{número}. Es decir, a \codejs{número} se le asigna \codejs{2}.
+  \end{enumerate}
+  \item \codejs{while} recibe \codejs{true} como resultado de \codejs{2 < 3}, por lo que evalúa sus instrucciones:
+  \begin{enumerate}
+    \item Se escribe el dato guardado dentro de \codejs{número} en la consola. Es decir, se escribe \codejs{2} en la consola.
+    \item Se calcula el resultado de \codejs{número + 1} y se le asigna a la variable \codejs{número}. Es decir, a \codejs{número} se le asigna \codejs{3}.
+  \end{enumerate}
+  \item \codejs{while} recibe \codejs{false} como resultado de \codejs{3 < 3}, por lo que sus instrucciones no son evaluadas y se termina el ciclo.
+  \item Se escribe \textquotedbl Alcanzable :D\textquotedbl\medspace en la consola.
+\end{enumerate}
+
+Para que un ciclo no se repita infinitamente es necesario crear una variable. No solo basta con crearla, igual se debe hacer lo siguiente:
+\begin{enumerate}
+  \item Se le debe asignar un valor inicial.
+  \item Se debe usar la variable para decidir si las instrucciones del ciclo se van a evaluar.
+  \item Al menos una instrucción dentro del ciclo debe modificar la variable.
+\end{enumerate}
+Este patrón es tan común común que existe un ciclo que te permite definir estos tres aspectos en una sola línea: el ciclo \codejs{for}. El ejemplo anterior que usa un ciclo \codejs{while} puede ser reescrito de esta forma:
+\lstinputlisting[style=ES6]{code/cicles/for.js}
 
 \subsection*{Estructuras de datos}
 Son tipos de datos que contienen otros datos. A mí me gusta llamarlos \textit{datos compuestos}. Las estructuras de datos más comunes en JavaScript, mas no las únicas, son los arreglos y los objetos.
