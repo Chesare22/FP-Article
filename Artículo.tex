@@ -141,52 +141,53 @@
 
 \begin{document}
 \title{\Large{\textbf{Principios y Patrones de Programación Funcional}}}
-\author{César González}
-\date{12 de Noviembre del 2021}
+\author{César Alejandro González Ortega}
+\date{16 de Noviembre del 2021 \\
+  \bigskip\normalsize{Herramientas para la Comunicación Científica, Facultad de Matemáticas de la Universidad Autónoma de Yucatán}}
 \maketitle
 
 
 \pagebreak
 \section*{Resumen}
-Este artículo comienza con una introducción a la programación, posteriormente se explican algunos conceptos básicos de la programación imperativa con ejemplos en JavaScript, luego se hace una introducción a la programación funcional, sus principios y patrones básicos con ejemplos en JavaScript, después se menciona brevemente qué son los objetos y finalmente se describen dos arquitecturas funcionales, una para aplicaciones de consola y otra para aplicaciones web.
+Este artículo comienza con una introducción a la programación, posteriormente se explican algunos conceptos básicos de la programación imperativa con ejemplos en JavaScript, luego se hace una introducción a la programación funcional, sus principios y patrones básicos con ejemplos en JavaScript y finalmente se describen dos arquitecturas funcionales, una para aplicaciones de consola y otra para aplicaciones web.
 
 El tema principal de este artículo es la programación funcional, para ello es necesario entender conceptos de programación en general y la sintaxis básica del lenguaje de programación en el que están escritos los ejemplos de código. Si ya conoces la sintaxis de JavaScript, puedes saltar a la sección \textbf{\ref{sec:fp-intro}. \nameref{sec:fp-intro}} en la pág. \pageref{sec:fp-intro}.
 
 \section{Introducción a la programación}
 A grandes rasgos, las computadoras son máquinas que pueden guardar datos y hacer operaciones controladas por programas. Los programas le brindan instrucciones y datos a una computadora para indicar qué operaciones realizar, en qué orden, cuántas veces, en qué momento, etc. Sin programas, las computadoras solamente serían máquinas complicadas que convierten electricidad en calor.
 
-Una desventaja de las computadoras es que no pueden convertir el lenguaje humano a datos e instrucciones, estas solamente pueden procesar bits. Un bit es la unidad básica de información y puede tener dos estados: encendido o apagado, uno o cero, verdadero o falso. Tanto las instrucciones como los datos de las computadoras están representadas por secuencias de bits. A las secuencias de bits que pueden ser ejecutadas por una computadora se les llama lenguaje de máquina.
+Una desventaja de las computadoras es que no pueden convertir el lenguaje humano a datos e instrucciones, estas solamente pueden procesar \textit{bits}. Un bit es la unidad básica de información y puede tener dos estados: encendido o apagado, uno o cero, verdadero o falso. Tanto las instrucciones como los datos de las computadoras están representadas por secuencias de bits. A las secuencias de bits que pueden ser ejecutadas por una computadora se les llama \textit{lenguaje de máquina}.
 
-La programación es el acto de escribir programas para lograr tareas específicas. Actualmente los programadores no escriben programas en lenguaje de máquina, sino que escriben texto en un lenguaje de programación y un programa llamado intérprete o compilador traduce el lenguaje de programación a lenguaje máquina\cite{compilers-and-interpreters}. El código fuente (a veces llamado simplemente código) es texto plano escrito en un lenguaje de programación.
+La \textit{programación} es el acto de escribir programas para lograr tareas específicas. Actualmente los programadores no escriben programas en lenguaje de máquina, sino que escriben texto en un \textit{lenguaje de programación} y un programa llamado intérprete o compilador traduce el lenguaje de programación a lenguaje máquina\cite{compilers-and-interpreters}. El \textit{código fuente} (a veces llamado simplemente código) es texto plano escrito en un lenguaje de programación.
 
-Los paradigmas de programación, o estilos, describen la estructura y los elementos de un programa. Los paradigmas de programación pueden ser categorizados en:
+Existen diversos \textit{estilos de programación}, o \textit{paradigmas}. Los paradigmas de programación pueden ser categorizados en:
 \begin{enumerate}
   \item \textbf{Imperativo:} Los programas son tratados como secuencias de instrucciones (algoritmos). Se escribe paso a paso cómo llegar a un resultado.
-  \item \textbf{Declarativo:} Se describe cómo es el resultado deseado. El código fuente no muestra el procedimiento concreto para llegar a un resultado.
+  \item \textbf{Declarativo:} Se describe cómo es el resultado deseado. El código fuente no muestra el procedimiento concreto para llegar a un resultado, sino sus características.
 \end{enumerate}
 
 
 \section{Sintaxis básica de JavaScript}
-El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes\cite{why-js} para ser usado con un estilo imperativo, declarativo o híbrido. Este documento no es una exploración exhaustiva de JavaScript, por simplicidad hay detalles deliberadamente ignorados al definir algunas características del lenguaje.
+El lenguaje de programación que se va a usar para los ejemplos de código es JavaScript, por su accesibilidad y porque tiene las características suficientes para ser usado con un estilo imperativo, declarativo o híbrido\cite{why-js}. Este documento no es una exploración exhaustiva de JavaScript, por simplicidad hay detalles deliberadamente ignorados al definir algunas características del lenguaje.
 
 \subsection{Datos primitivos}
-Los datos primitivos son la unidad de información básica de los programas. En JavaScript los datos primitivos más usados son números, cadenas de caracteres y booleanos. Los números pueden ser enteros o decimales, y negativos o positivos. Las cadenas de caracteres almacenan datos que representan texto y para crearlas se delimitan los caracteres entre un par de comillas dobles c. Los booleanos representan \textit{verdadero} o \textit{falso} y son usados principalmente en condicionales, las cuales se explicarán en breve.
+Los datos primitivos son la unidad de información básica de los programas. En JavaScript los datos primitivos más usados son números, cadenas de caracteres y booleanos. Los números pueden ser enteros o decimales, y negativos o positivos. Las cadenas de caracteres almacenan datos que representan texto y para crearlas se delimitan los caracteres entre un par de comillas dobles \code{\textquotedbl\textquotedbl}. Los booleanos representan \textit{verdadero} o \textit{falso} y son usados principalmente en condicionales, las cuales se explicarán en breve.
 
 \lstinputlisting[style=ES6]{code/primitives.js}
 
 \begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Comentarios en el código fuente}
-Habrás visto que en el bloque anterior hay unas barras grises \code{//} seguidas de texto. Esos son los comentarios, texto en el código fuente que no se ejecuta y sirve para que el escritor del código le exprese al lector detalles que podrían ser pasados por alto.
+Habrás visto que en el bloque anterior hay unas barras grises \code{//} seguidas de texto. Esos son los \textit{comentarios}, texto en el código fuente que no se ejecuta y sirve para que el escritor del código le exprese al lector detalles que podrían ser pasados por alto.
 \newline
 Otra forma de escribir comentarios es delimitando texto con los símbolos \code{/*} al inicio y \code{*/} al final.
 \end{bclogo}
 
 \subsection{Variables}
-Por otro lado, las variables son espacios en la memoria del programa que guardan un dato. Para indicar que se quiere crear una variable se usa la palabra clave \codejs{let} seguida del nombre de la variable. El operador de asignación \codejs{=} indica qué valor guardar en la variable. Una variable puede ser asignada varias veces a lo largo del programa. Se puede acceder al dato guardado en una variable escribiendo el nombre de la variable.
+Por otro lado, las variables son espacios en la memoria del programa que guardan un dato. Para indicar que se quiere crear una variable se usa la palabra clave \codejs{let} seguida del nombre de la variable. El operador de \textit{asignación} \codejs{=} indica qué valor guardar en la variable. Una variable puede ser asignada varias veces a lo largo del programa. Se puede acceder al dato guardado en una variable escribiendo el nombre de la variable.
 
 \lstinputlisting[style=ES6]{code/variables.js}
 
 \begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Inspeccionar datos}
-Existen varias formas para presentar los datos de los programas hacia las personas, una de ellas es mediante la consola. Una consola sirve, entre otras cosas, para intercambiar texto entre un programa y un usuario. En JavaScript se usa la instrucción \codejs{console.log( /* dato */ )} para escribir un dato del programa en la consola. A lo largo de este documento se usará un comentario a la derecha de dicha instrucción para indicar qué texto sería escrito en la consola.
+Existen varias formas para presentar los datos de los programas hacia las personas, una de ellas es mediante la \textit{consola}. Una consola sirve, entre otras cosas, para intercambiar texto entre un programa y un usuario. En JavaScript se usa la instrucción \codejs{console.log( /* dato */ )} para escribir un dato del programa en la consola. A lo largo de este documento se usará un comentario a la derecha de dicha instrucción para indicar qué texto sería escrito en la consola.
 \end{bclogo}
 
 \subsection{Operadores}
@@ -222,7 +223,7 @@ Los operadores lógicos son similares a los operadores de comparación porque ge
 \lstinputlisting[style=ES6]{code/operators/logic.js}
 
 \subsection{Condicionales}
-Quizá te haya sorprendido que se dediquen tantos operadores al manejo de booleanos. Un booleano por sí solo no es muy interesante, su verdadero potencial recae en las condicionales. Las condicionales reciben booleanos para decidir si una secuencia de instrucciones será evaluada o no. La condicional más básica es el bloque \codejs{if}, su sintaxis es la siguiente:
+Quizá te haya sorprendido que se dediquen tantos operadores al manejo de booleanos. Un booleano por sí solo no es muy interesante, su verdadero potencial recae en las condicionales y los ciclos. Las condicionales reciben booleanos para decidir si una secuencia de instrucciones será evaluada o no. La condicional más básica es el bloque \codejs{if}, su sintaxis es la siguiente:
 \lstinputlisting[style=ES6]{code/conditionals/syntax-if.js}
 
 El bloque anterior solamente denota la sintaxis, no es un ejemplo válido de JavaScript porque el bloque \codejs{if} requiere que haya un dato entre los paréntesis. Veamos un ejemplo que sí se pueda ejecutar:
@@ -230,7 +231,7 @@ El bloque anterior solamente denota la sintaxis, no es un ejemplo válido de Jav
 
 Nótese que solo una instrucción de \codejs{console.log} fue evaluada. El programa no escribió \textquotedbl Buenos días\textquotedbl\medspace en la consola porque el booleano recibido en el bloque \codejs{if} era igual a \codejs{false}.
 
-También es posible indicar un bloque que se evaluaría solamente si no se evalúan las instrucciones dentro del \codejs{if}. Tal bloque se conoce como \codejs{else} y su sintaxis es la siguiente:
+También es posible indicar instrucciones que se evaluarían solamente si no se evalúan las instrucciones dentro del \codejs{if}. Para ello se usa un bloque \codejs{else} y su sintaxis es la siguiente:
 \lstinputlisting[style=ES6]{code/conditionals/syntax-else.js}
 Un ejemplo de código que usa \codejs{else}:
 \lstinputlisting[style=ES6]{code/conditionals/else.js}
@@ -272,20 +273,27 @@ Para que un ciclo no se repita infinitamente es necesario crear una variable. No
   \item Se debe usar la variable para decidir si las instrucciones del ciclo se van a evaluar.
   \item Al menos una instrucción dentro del ciclo debe asignar un nuevo dato en la variable.
 \end{enumerate}
-Las variables que cumplen con estas características a menudo son llamadas contadores o índices. Este patrón es tan común común que existe un ciclo que te permite definir las tres características en una sola línea: el ciclo \codejs{for}. El ejemplo anterior puede ser reescrito de la siguiente forma usando un \codejs{for}:
+Las variables que cumplen con estas características son llamadas \textit{contadores}. Este patrón es tan común común que existe un ciclo que te permite definir las tres características del contador en una sola línea: el ciclo \codejs{for}. El ejemplo anterior puede ser reescrito de la siguiente forma usando un \codejs{for}:
 \lstinputlisting[style=ES6]{code/cicles/for.js}
 \begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Variables con acceso restringido}
-Habrás visto que en el bloque anterior hay unas barras grises \code{//} seguidas de texto. Esos son los comentarios, texto en el código fuente que no se ejecuta y sirve para que el escritor del código le exprese al lector detalles que podrían ser pasados por alto.
-\newline
-Otra forma de escribir comentarios es delimitando texto con los símbolos \code{/*} al inicio y \code{*/} al final.
+En realidad los dos ejemplos de código no son exactamente iguales. La diferencia no es la sintaxis, sino qué pasa con la variable \codejs{número}. En el primer ejemplo la variable fue creada antes del ciclo \codejs{while} y se puede acceder a ella al terminar el ciclo, en el segundo es creada dentro del ciclo \codejs{for} y solamente se puede acceder a ella dentro del ciclo. Este comportamiento se debe al \textit{alcance de la variable}\cite{scope}, tema amplio que no será cubierto a detalle en este documento. En resumen: si una variable es creada usando \codejs{let}, solo se puede acceder a ella desde el bloque en el que fue creada y desde los bloques creados dentro de su mismo bloque.
 \end{bclogo}
 
 
 \subsection{Estructuras de datos}
-Son tipos de datos que contienen otros datos. A mí me gusta llamarlos \textit{datos compuestos}. Las estructuras de datos más comunes en JavaScript, mas no las únicas, son los arreglos y los objetos.
+Son tipos de datos que contienen otros datos. A mí me gusta llamarlos \textit{datos compuestos}. Las estructuras de datos más comunes en JavaScript, mas no las únicas, son los \textit{arreglos} y los \textit{objetos}.
+\subsubsection{Arreglos}
+Un arreglo se puede ver como una colección de datos ordenados. Para crear un objeto se usa un par de corchetes \codejs{[ ]} y adentro se escriben sus datos separados por comas. Los datos se pueden acceder mediante su índice. El primer dato del arreglo corresponde al índice 0, el segundo al índice 1 y así sucesivamente. Se puede usar un operador de asignación para indicar qué dato guardar en un índice del arreglo. Para acceder al tamaño de un arreglo se usa su propiedad \code{length}.
+\lstinputlisting[style=ES6]{code/data-structures/arrays.js}
+Para hacer operaciones con los elementos de un arreglo es común usar ciclos donde el contador también es usado como índice del arreglo:
+\lstinputlisting[style=ES6]{code/data-structures/arrays-in-for.js}
+\subsubsection{Objetos}
+¿Qué tal si en lugar de acceder a los elementos de una estructura de datos mediante su índice se accede mediante el nombre del elemento? Eso se puede hacer con un \textit{objeto}, un dato que guarda pares de nombre-dato (o clave-valor). A cada elemento de un objeto se le llama \textit{propiedad}. Para crear un objeto se usa un par de llaves \codejs{\{ \}} y adentro se escriben sus propiedades separadas por comas. Para acceder a una propiedad del objeto se usa el operador \textit{miembro} \codejs{.} seguido del nombre de la propiedad. Por ejemplo:
+\lstinputlisting[style=ES6]{code/data-structures/objects.js}
+\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Estructuras de datos anidadas}
+Los datos guardados en una estructura de datos no necesariamente deben ser primitivos, también pueden guardar otras estructuras de datos.
+\end{bclogo}
 
-Un arreglo se puede ver como una colección de datos ordenados. Los datos se pueden acceder mediante su índice. El primer dato del arreglo corresponde al índice 0, el segundo al índice 1 y así sucesivamente. Se puede usar el operador de asignación \code{=} para indicar qué dato guardar en un índice del arreglo.
-\lstinputlisting[style=ES6]{code/arrays.js}
 
 \subsection{Funciones}
 
@@ -296,26 +304,53 @@ La programación funcional no es un concepto nuevo. Sus raíces matemáticas (el
 
 Algunas características de la programación funcional son:
 \begin{itemize}
-  \item Es fácil seguir el flujo de datos.
-  \item El código fuente es fácil de modificar.
-  \item El código fuente puede llegar a ser muy simple. ``Una base simple produce código simple en la práctica" \medspace – Evan Czaplicki, creador de Elm.\cite{mainstream-elm}
-  \item En una aplicación existente se pueden aplicar patrones funcionales esporádicamente, sin comprometerse a una arquitectura funcional.\cite{skeptics-functional-style}
+  \item El código fuente sigue un estilo \textbf{declarativo}.
+  \item Los programas resultantes tienen calidad y desempeño consistente.
+  \item El código fuente puede llegar a ser muy simple. ``Una base simple produce código simple en la práctica" \medspace – Evan Czaplicki, creador de Elm\cite{mainstream-elm}.
+  \item Se requiere menos esfuerzo mental para entender código funcional que código en un estilo imperativo\cite{skeptics-functional-style}.
+  \item En una aplicación existente se pueden aplicar patrones funcionales esporádicamente, sin comprometerse a una arquitectura funcional\cite{skeptics-functional-style}.
 \end{itemize}
 
 
-\section{Principios y patrones de la programación funcional}
+\section{Principios y patrones de programación funcional}
 
 
 \subsection{Las funciones también son datos}
 
 
+\subsection{Inmutabilidad}
+
+
+\subsection{Determinismo}
+
+
+\subsection{Transparencia referencial}
+
+
+\section{Arquitecturas funcionales}
+
+
+\subsection{Puertos y adaptadores}
+Esta sección está fuertemente inspirada por la plática ``Functional architecture – The pits of success"\cite{functional-architecture}
+
+
+\subsection{La arquitectura Elm}
+Esta sección está fuertemente inspirada por la plática ``Developer Happiness on the Front End with Elm"\cite{developer-happiness-elm}
+
+
+\section{Corolario}
+
+
 \pagebreak
 \begin{thebibliography}{99}
-  \bibitem{compilers-and-interpreters} \href{https://youtu.be/_C5AHaS1mOA}{Boiteau, D. (Escritor), \& Beecroft, S. (Director). (1983). Computer Languages (Temporada 1, Episodio 6) [Episodio de serie de televisión]. En M. McManus (Productor ejecutivo), \textit{Bits and Bytes}. TVOntario.}
-  \bibitem{why-isnt-fp-norm} \href{https://youtu.be/QyJZzq0v7Z4}{Why Isn't Functional Programming the Norm? – Richard Feldman at ClojuTRE 2019}
-  \bibitem{mainstream-elm} \href{https://youtu.be/oYk8CKH7OhE?t=2133}{Let's be mainstream! User focused design in Elm – Evan Czaplicki at Curry On Prague! 2015}
-  \bibitem{skeptics-functional-style} \href{https://youtu.be/oF9XTJoScOE?t=1253}{A Skeptics Guide To Functional Style JavaScript – Jonathan Mills at NEJS CONF 2017}
-  \bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Why Learn Functional Programming in JavaScript? – Eric Elliot}
+  \bibitem{compilers-and-interpreters} \href{https://youtu.be/_C5AHaS1mOA}{Boiteau, D. (Escritor), y Beecroft, S. (Director). (1983). Computer Languages (Temporada 1, Episodio 6) [Episodio de programa de televisión]. En M. McManus (Productor ejecutivo), \textit{Bits and Bytes}. TVOntario.}
+  \bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Elliot, E. (20 de febrero de 2017). \textit{Why Learn Functional Programming in JavaScript?}. Medium. Recuperado de https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}
+  \bibitem{scope} \href{https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope\%20\&\%20closures/README.md\#you-dont-know-js-scope--closures}{Simpson, K. (2014) \textit{You Don't Know JS: Scope \& Closures}. O'Reilly Media, Inc.}
+  \bibitem{why-isnt-fp-norm} \href{https://clojutre.org/2019/#feldman}{Feldman, R. (26-27 de septiembre de 2019). \textit{Why Isn't Functional Programming the Norm?} [Sesión de conferencia]. ClojuTRE, Helsinki, Finlandia. https://clojutre.org/2019/\#feldman}
+  \bibitem{mainstream-elm} \href{https://youtu.be/oYk8CKH7OhE}{Czaplicki, E. (6-7 de junio de 2015). \textit{Let's be mainstream! User focused design in Elm} [Discurso principal]. Curry On, Praga, República Checa. https://youtu.be/oYk8CKH7OhE}
+  \bibitem{skeptics-functional-style} \href{https://youtu.be/oF9XTJoScOE}{Mills, J. (21 de julio de 2017). \textit{A Skeptics Guide To Functional Style JavaScript} [Sesión de conferencia]. NEJS CONF, Omaha, Nebraska, Estados Unidos de América. https://youtu.be/oF9XTJoScOE}
+  \bibitem{functional-architecture} \href{https://youtu.be/US8QG9I1XW0}{Seemann, M. (2016). \textit{Functional architecture – The pits of success} [Sesión de conferencia]. NDC Conferences, Sídney, Australia. https://youtu.be/US8QG9I1XW0}
+  \bibitem{developer-happiness-elm} \href{https://youtu.be/kuOCx0QeQ5c}{Yank, K. (25 de mayo de 2017). \textit{Developer Happiness on the Front End with Elm} [Vídeo]. Recuperado de https://youtu.be/kuOCx0QeQ5c}
 \end{thebibliography}
 
 \end{document}
