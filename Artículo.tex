@@ -142,7 +142,7 @@
 \begin{document}
 \title{\Large{\textbf{Principios y Patrones de Programación Funcional}}}
 \author{César Alejandro González Ortega}
-\date{16 de Noviembre del 2021 \\
+\date{18 de Noviembre del 2021 \\
   \bigskip\normalsize{Herramientas para la Comunicación Científica, Facultad de Matemáticas de la Universidad Autónoma de Yucatán}}
 \maketitle
 
@@ -276,7 +276,7 @@ Para que un ciclo no se repita infinitamente es necesario crear una variable. No
 Las variables que cumplen con estas características son llamadas \textit{contadores}. Este patrón es tan común común que existe un ciclo que te permite definir las tres características del contador en una sola línea: el ciclo \codejs{for}. El ejemplo anterior puede ser reescrito de la siguiente forma usando un \codejs{for}:
 \lstinputlisting[style=ES6]{code/cicles/for.js}
 \begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Variables con acceso restringido}
-En realidad los dos ejemplos de código no son exactamente iguales. La diferencia no es la sintaxis, sino qué pasa con la variable \codejs{número}. En el primer ejemplo la variable fue creada antes del ciclo \codejs{while} y se puede acceder a ella al terminar el ciclo, en el segundo es creada dentro del ciclo \codejs{for} y solamente se puede acceder a ella dentro del ciclo. Este comportamiento se debe al \textit{alcance de la variable}\cite{scope}, tema amplio que no será cubierto a detalle en este documento. En resumen: si una variable es creada usando \codejs{let}, solo se puede acceder a ella desde el bloque en el que fue creada y desde los bloques creados dentro de su mismo bloque.
+En realidad los dos ejemplos de código no son exactamente iguales. La diferencia no es la sintaxis, sino qué pasa con la variable \codejs{número}. En el primer ejemplo la variable fue creada antes del ciclo \codejs{while} y se puede acceder a ella al terminar el ciclo, en el segundo es creada dentro del ciclo \codejs{for} y solamente se puede acceder a ella dentro del ciclo. Este comportamiento se debe al \textit{ámbito de la variable}\cite{scope}, tema amplio que no será cubierto a detalle en este documento. En resumen: si una variable es creada usando \codejs{let}, solo se puede acceder a ella desde el bloque en el que fue creada y desde los bloques creados dentro de su mismo bloque.
 \end{bclogo}
 
 
@@ -296,6 +296,29 @@ Los datos guardados en una estructura de datos no necesariamente deben ser primi
 
 
 \subsection{Funciones}
+Una función es un conjunto de instrucciones que realiza una tarea o calcula un valor. Debe tomar alguna entrada y devolver una salida. En la \textit{declaración} de una función se definen cuáles son sus \textit{parámetros} (variables que van a guardar los datos de entrada), sus instrucciones y su \textit{valor de retorno} (dato de salida). En la \textit{llamada} de una función se evalúan sus instrucciones con los \textit{argumentos} (datos de entrada) especificados.\cite{functions}
+
+La declaración de una función tiene la siguiente sintaxis:
+\lstinputlisting[style=ES6]{code/functions/syntax.js}
+Ejemplo de cómo declarar y llamar a una función que calcula el doble de un número:
+\lstinputlisting[style=ES6]{code/functions/double.js}
+Nótese que el \codejs{console.log} no es evaluado en la declaración de la función, sino en su llamada.
+
+\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Datos especiales}
+En JavaScript existe un dato especial llamado \codejs{undefined}. Es el dato que guardan las variables a las que no se les asigna un dato, es el valor de retorno de las funciones sin \codejs{return}, es el dato que guardan los parámetros de una función invocada sin argumentos. \\
+Otro dato especial de JavaScript es \codejs{NaN}, es el resultado de intentar hacer operaciones aritméticas con datos que no pueden ser procesados. Por ejemplo, \codejs{undefined * 2} o \codejs{0 / 0} generan como resultado \codejs{NaN}.
+\end{bclogo}
+
+
+\subsection{Características declarativas de JavaScript}
+Todas las características del lenguaje abarcadas hasta el momento han sido imperativas, se especifican los pasos para llegar a un resultado. Las características declarativas de JavaScript no aportan funcionalidad que no pueda ser lograda con las características imperativas, sino que aportan sintaxis adicional para hacer ciertos bloques más legibles. En foros de Internet es común escuchar que tales características son azúcar sintáctica (\textit{syntactic sugar}). Algunas de esas características son:
+
+\subsubsection{Desestructuración}
+Sirve para guardar en variables los elementos de una estructura de datos sin usar el operador miembro.
+
+\subsubsection{Operador resto \codejs{...}}
+
+\subsubsection{Funciones flecha}
 
 
 \section{Introducción a la programación funcional}
@@ -344,13 +367,14 @@ Esta sección está fuertemente inspirada por la plática ``Developer Happiness 
 \pagebreak
 \begin{thebibliography}{99}
   \bibitem{compilers-and-interpreters} \href{https://youtu.be/_C5AHaS1mOA}{Boiteau, D. (Escritor), y Beecroft, S. (Director). (1983). Computer Languages (Temporada 1, Episodio 6) [Episodio de programa de televisión]. En M. McManus (Productor ejecutivo), \textit{Bits and Bytes}. TVOntario.}
-  \bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Elliot, E. (20 de febrero de 2017). \textit{Why Learn Functional Programming in JavaScript?}. Medium. Recuperado de https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}
+  \bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Elliot, E. (20 de febrero de 2017). \textit{Why Learn Functional Programming in JavaScript?}. Medium. https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}
   \bibitem{scope} \href{https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope\%20\&\%20closures/README.md\#you-dont-know-js-scope--closures}{Simpson, K. (2014) \textit{You Don't Know JS: Scope \& Closures}. O'Reilly Media, Inc.}
+  \bibitem{functions} \href{https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions}{Developer.mozilla.org (15 de noviembre del 2021). \textit{Funciones - JavaScript | MDN}. https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions}
   \bibitem{why-isnt-fp-norm} \href{https://clojutre.org/2019/#feldman}{Feldman, R. (26-27 de septiembre de 2019). \textit{Why Isn't Functional Programming the Norm?} [Sesión de conferencia]. ClojuTRE, Helsinki, Finlandia. https://clojutre.org/2019/\#feldman}
   \bibitem{mainstream-elm} \href{https://youtu.be/oYk8CKH7OhE}{Czaplicki, E. (6-7 de junio de 2015). \textit{Let's be mainstream! User focused design in Elm} [Discurso principal]. Curry On, Praga, República Checa. https://youtu.be/oYk8CKH7OhE}
   \bibitem{skeptics-functional-style} \href{https://youtu.be/oF9XTJoScOE}{Mills, J. (21 de julio de 2017). \textit{A Skeptics Guide To Functional Style JavaScript} [Sesión de conferencia]. NEJS CONF, Omaha, Nebraska, Estados Unidos de América. https://youtu.be/oF9XTJoScOE}
   \bibitem{functional-architecture} \href{https://youtu.be/US8QG9I1XW0}{Seemann, M. (2016). \textit{Functional architecture – The pits of success} [Sesión de conferencia]. NDC Conferences, Sídney, Australia. https://youtu.be/US8QG9I1XW0}
-  \bibitem{developer-happiness-elm} \href{https://youtu.be/kuOCx0QeQ5c}{Yank, K. (25 de mayo de 2017). \textit{Developer Happiness on the Front End with Elm} [Vídeo]. Recuperado de https://youtu.be/kuOCx0QeQ5c}
+  \bibitem{developer-happiness-elm} \href{https://youtu.be/kuOCx0QeQ5c}{Yank, K. (25 de mayo de 2017). \textit{Developer Happiness on the Front End with Elm} [Vídeo]. https://youtu.be/kuOCx0QeQ5c}
 \end{thebibliography}
 
 \end{document}
