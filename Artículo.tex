@@ -10,18 +10,21 @@
 \usepackage{pst-blur}
 \usepackage{fancyhdr}
 \usepackage{hyphenat}
+\usepackage[font=small,
+            labelfont={bf,it},
+            textfont=it]{caption}
 
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
 \rfoot{pág. \thepage}
 
-%\titlespacing*{\subsection} {2ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
-%\titlespacing*{\subsubsection}{4ex}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\renewcommand\lstlistingname{Fig.}
+\renewcommand{\headrulewidth}{0pt}
 
 \newcommand{\code}[1]{\tcbox{\texttt{#1}}}
 \newcommand{\codejs}[1]{\tcbox{\lstinline[style=ES6]{#1}}}
 \newcommand{\operator}[2]{\item \textbf{#1} \codejs{#2}:}
+\newcommand{\jsfile}[2]{\lstinputlisting[style=ES6, caption={#1}]{#2}}
 
 \colorlet{lightgray}{gray!20}
 \tcbset{on line, 
@@ -102,7 +105,8 @@
   basicstyle=\ttfamily,
   breakatwhitespace=false,
   breaklines=false,
-  %captionpos=b,
+  captionpos=b,
+  %abovecaptionskip=\medskipamount,
   columns=fullflexible,
   commentstyle=\color{mediumgray}\upshape,
   emph={},
@@ -144,10 +148,13 @@
 
 
 \begin{document}
-\title{\Large{\textbf{Principios y Patrones de Programación Funcional}}}
-\author{César Alejandro González Ortega}
-\date{18 de Noviembre del 2021 \\
-  \bigskip\normalsize{Herramientas para la Comunicación Científica, Facultad de Matemáticas de la Universidad Autónoma de Yucatán}}
+\title{\Large{\textbf{Principios y Patrones de Programación Funcional}}\\
+  \bigskip\normalsize{Herramientas para la Comunicación Científica, Facultad de Matemáticas de la Universidad Autónoma de Yucatán \medskip}}
+\author{
+  \textbf{Autor}\\César Alejandro González Ortega\\
+  \medskip\\ \textbf{Profesor}\\Francisco Heredia Lopez\\ \medskip
+}
+
 \maketitle
 
 
@@ -177,7 +184,7 @@ El lenguaje de programación que se va a usar para los ejemplos de código es Ja
 \subsection{Datos primitivos}
 Los datos primitivos son la unidad de información básica de los programas. En JavaScript los datos primitivos más usados son números, cadenas de caracteres y booleanos. Los números pueden ser enteros o decimales, y negativos o positivos. Las cadenas de caracteres almacenan datos que representan texto y para crearlas se delimitan los caracteres entre un par de comillas dobles \code{\textquotedbl\textquotedbl}. Los booleanos representan \textit{verdadero} o \textit{falso} y son usados principalmente en condicionales, las cuales se explicarán en breve.
 
-\lstinputlisting[style=ES6]{code/primitives.js}
+\jsfile{Ejemplos de datos primitivos}{code/primitives.js}
 
 \begin{info}{Comentarios en el código fuente}
 Habrás visto que en el bloque anterior hay unas barras grises \code{//} seguidas de texto. Esos son los \textit{comentarios}, texto en el código fuente que no se ejecuta y sirve para que el escritor del código le exprese al lector detalles que podrían ser pasados por alto.
@@ -188,7 +195,7 @@ Otra forma de escribir comentarios es delimitando texto con los símbolos \code{
 \subsection{Variables}
 Por otro lado, las variables son espacios en la memoria del programa que guardan un dato. Para indicar que se quiere crear una variable se usa la palabra clave \codejs{let} seguida del nombre de la variable. El operador de \textit{asignación} \codejs{=} indica qué valor guardar en la variable. Una variable puede ser asignada varias veces a lo largo del programa. Se puede acceder al dato guardado en una variable escribiendo el nombre de la variable.
 
-\lstinputlisting[style=ES6]{code/variables.js}
+\jsfile{Ejemplo de variables}{code/variables.js}
 
 \begin{info}{Inspeccionar datos}
 Existen varias formas para presentar los datos de los programas hacia las personas, una de ellas es mediante la \textit{consola}. Una consola sirve, entre otras cosas, para intercambiar texto entre un programa y un usuario. En JavaScript se usa la instrucción \codejs{console.log( /* dato */ )} para escribir un dato del programa en la consola. A lo largo de este documento se usará un comentario a la derecha de dicha instrucción para indicar qué texto sería escrito en la consola.
@@ -205,7 +212,7 @@ Los operadores aritméticos realizan operaciones con números. Algunos operadore
   \operator{Multiplicación}{*} Multiplica dos números.
   \operator{División}{/} Calcula la división del número izquierdo entre el derecho.
 \end{itemize}
-\lstinputlisting[style=ES6]{code/operators/arithmetic.js}
+\jsfile{Operadores aritméticos}{code/operators/arithmetic.js}
 
 \medskip
 Los operadores de comparación determinan la igualdad o desigualdad entre dos valores. Solo pueden generar datos booleanos. Algunos operadores de comparación en JavaScript son:
@@ -215,7 +222,7 @@ Los operadores de comparación determinan la igualdad o desigualdad entre dos va
   \operator{Menor que}{<} Genera \code{true} solamente si el número izquierdo es \textit{menor} que el derecho.
   \operator{Mayor que}{>} Genera \code{true} solamente si el número izquierdo es \textit{mayor} que el derecho.
 \end{itemize}
-\lstinputlisting[style=ES6]{code/operators/comparison.js}
+\jsfile{Operadores de comparación}{code/operators/comparison.js}
 
 \medskip
 Los operadores lógicos son similares a los operadores de comparación porque generan datos booleanos. Algunos operadores lógicos de JavaScript son:
@@ -224,31 +231,33 @@ Los operadores lógicos son similares a los operadores de comparación porque ge
   \operator{OR}{||} Genera \code{false} solamente si ambos datos son \code{false}.
   \operator{NOT}{!} Operador que recibe un solo booleano y genera su opuesto. Si recibe \code{true}, genera \code{false} y viceversa.
 \end{itemize}
-\lstinputlisting[style=ES6]{code/operators/logic.js}
+\jsfile{Operadores lógicos}{code/operators/logic.js}
 
 \subsection{Condicionales}
 Quizá te haya sorprendido que se dediquen tantos operadores al manejo de booleanos. Un booleano por sí solo no es muy interesante, su verdadero potencial recae en las condicionales y los ciclos. Las condicionales reciben booleanos para decidir si una secuencia de instrucciones será evaluada o no. La condicional más básica es el bloque \codejs{if}, su sintaxis es la siguiente:
-\lstinputlisting[style=ES6]{code/conditionals/syntax-if.js}
+\jsfile{Sintaxis del bloque \codejs{if}}{code/conditionals/syntax-if.js}
 
 El bloque anterior solamente denota la sintaxis, no es un ejemplo válido de JavaScript porque el bloque \codejs{if} requiere que haya un dato entre los paréntesis. Veamos un ejemplo que sí se pueda ejecutar:
-\lstinputlisting[style=ES6]{code/conditionals/if.js}
+\pagebreak
+\jsfile{Ejemplo de bloque \codejs{if}}{code/conditionals/if.js}
 
 Nótese que solo una instrucción de \codejs{console.log} fue evaluada. El programa no escribió \textquotedbl Buenos días\textquotedbl\medspace en la consola porque el booleano recibido en el bloque \codejs{if} era igual a \codejs{false}.
 
 También es posible indicar instrucciones que se evaluarían solamente si no se evalúan las instrucciones dentro del \codejs{if}. Para ello se usa un bloque \codejs{else} y su sintaxis es la siguiente:
-\lstinputlisting[style=ES6]{code/conditionals/syntax-else.js}
+\jsfile{Sintaxis del bloque \codejs{else}}{code/conditionals/syntax-else.js}
 Un ejemplo de código que usa \codejs{else}:
-\lstinputlisting[style=ES6]{code/conditionals/else.js}
+\jsfile{Ejemplos de bloques \codejs{else}}{code/conditionals/else.js}
 
 \subsection{Ciclos}
 Los ciclos son la respuesta a la pregunta ``¿Cómo se puede evaluar una instrucción múltiples veces sin tener que volver a escribirla?" Los ciclos son bloques de código similares a las condicionales porque su evaluación puede depender de un booleano. La diferencia es que los ciclos vuelven a ser evaluados si el booleano es \codejs{true}. El ciclo más básico es el bloque \codejs{while}, su sintaxis es la siguiente:
-\lstinputlisting[style=ES6]{code/cicles/syntax-while.js}
+\jsfile{Sintaxis del bloque \codejs{while}}{code/cicles/syntax-while.js}
 Por ejemplo, para escribir en la consola múltiples veces el texto \textquotedbl Around the world\textquotedbl\medspace se hace lo siguiente:
-\lstinputlisting[style=ES6]{code/cicles/infinite-while.js}
+\jsfile{Ciclo infinito usando \codejs{while}}{code/cicles/infinite-while.js}
 Este programa evalúa el \codejs{while}, como recibe \codejs{true} escribe \textquotedbl Around the world\textquotedbl\medspace en la consola, luego vuelve a evaluar el \codejs{while}, como recibe \codejs{true} escribe \textquotedbl Around the world\textquotedbl\medspace y así mientras el programa se mantenga prendido, nunca escribe \textquotedbl Inalcanzable\textquotedbl\medspace en la consola.
 
 Se logró el cometido de evaluar una instrucción múltiples veces, pero se desveló un nuevo problema: ¿Cómo evitar que una instrucción se evalúe infinitas veces?. La respuesta es mediante el uso de variables. El booleano que recibe el bloque \codejs{while} puede depender de una variable que es reasignada dentro del ciclo. Veamos un ejemplo:
-\lstinputlisting[style=ES6]{code/cicles/while.js}
+\pagebreak
+\jsfile{Ciclo finito usando \codejs{while}}{code/cicles/while.js}
 Analicemos paso por paso qué hace este programa:
 \begin{enumerate}
   \item Se crea la variable \codejs{número} y se le asigna el valor de \codejs{0}
@@ -278,22 +287,22 @@ Para que un ciclo no se repita infinitamente es necesario crear una variable. No
   \item Al menos una instrucción dentro del ciclo debe asignar un nuevo dato en la variable.
 \end{enumerate}
 Las variables que cumplen con estas características son llamadas \textit{contadores}. Este patrón es tan común común que existe un ciclo que te permite definir las tres características del contador en una sola línea: el ciclo \codejs{for}. El ejemplo anterior puede ser reescrito de la siguiente forma usando un \codejs{for}:
-\lstinputlisting[style=ES6]{code/cicles/for.js}
+\jsfile{Ciclo finito usando \codejs{for}}{code/cicles/for.js}
 \begin{info}{Variables con acceso restringido}
 En realidad los dos ejemplos de código no son exactamente iguales. La diferencia no es la sintaxis, sino qué pasa con la variable \codejs{número}. En el primer ejemplo la variable fue creada antes del ciclo \codejs{while} y se puede acceder a ella al terminar el ciclo, en el segundo es creada dentro del ciclo \codejs{for} y solamente se puede acceder a ella dentro del ciclo. Este comportamiento se debe al \textit{ámbito de la variable}\cite{scope}, tema amplio que no será cubierto a detalle en este documento. En resumen: si una variable es creada usando \codejs{let}, solo se puede acceder a ella desde el bloque en el que fue creada y desde los bloques creados dentro de su mismo bloque.
-\end{bclogo}
+\end{info}
 
 
 \subsection{Estructuras de datos}
 Son tipos de datos que contienen otros datos. A mí me gusta llamarlos \textit{datos compuestos}. Las estructuras de datos más comunes en JavaScript, mas no las únicas, son los \textit{arreglos} y los \textit{objetos}.
 \subsubsection{Arreglos}
 Un arreglo se puede ver como una colección de datos ordenados. Para crear un objeto se usa un par de corchetes \codejs{[ ]} y adentro se escriben sus datos separados por comas. Los datos se pueden acceder mediante su índice. El primer dato del arreglo corresponde al índice 0, el segundo al índice 1 y así sucesivamente. Se puede usar un operador de asignación para indicar qué dato guardar en un índice del arreglo. Para acceder al tamaño de un arreglo se usa su propiedad \code{length}.
-\lstinputlisting[style=ES6]{code/data-structures/arrays.js}
+\jsfile{Crear, acceder y modificar un arreglo}{code/data-structures/arrays.js}
 Para hacer operaciones con los elementos de un arreglo es común usar ciclos donde el contador también es usado como índice del arreglo:
-\lstinputlisting[style=ES6]{code/data-structures/arrays-in-for.js}
+\jsfile{Ciclar un arreglo}{code/data-structures/arrays-in-for.js}
 \subsubsection{Objetos}
 ¿Qué tal si en lugar de acceder a los elementos de una estructura de datos mediante su índice se accede mediante el nombre del elemento? Eso se puede hacer con un \textit{objeto}, un dato que guarda pares de nombre-dato (o clave-valor). A cada elemento de un objeto se le llama \textit{propiedad}. Para crear un objeto se usa un par de llaves \codejs{\{ \}} y adentro se escriben sus propiedades separadas por comas. Para acceder a una propiedad del objeto se usa el operador \textit{miembro} \codejs{.} seguido del nombre de la propiedad. Por ejemplo:
-\lstinputlisting[style=ES6]{code/data-structures/objects.js}
+\jsfile{Crear, acceder y modificar objetos}{code/data-structures/objects.js}
 \begin{info}{Estructuras de datos anidadas}
 Los datos guardados en una estructura de datos no necesariamente deben ser primitivos, también pueden guardar otras estructuras de datos.
 \end{info}
@@ -303,9 +312,9 @@ Los datos guardados en una estructura de datos no necesariamente deben ser primi
 Una función es un conjunto de instrucciones que realiza una tarea o calcula un valor. Debe tomar alguna entrada y devolver una salida. En la \textit{declaración} de una función se definen cuáles son sus \textit{parámetros} (variables que van a guardar los datos de entrada), sus instrucciones y su \textit{valor de retorno} (dato de salida). En la \textit{llamada} de una función se evalúan sus instrucciones con los \textit{argumentos} (datos de entrada) especificados.\cite{functions}
 
 La declaración de una función tiene la siguiente sintaxis:
-\lstinputlisting[style=ES6]{code/functions/syntax.js}
+\jsfile{Sintaxis para declarar funciones}{code/functions/syntax.js}
 Ejemplo de cómo declarar y llamar a una función que calcula el doble de un número:
-\lstinputlisting[style=ES6]{code/functions/double.js}
+\jsfile{Función que calcula el doble de un número y lo escribe en la consola}{code/functions/double.js}
 Nótese que el \codejs{console.log} no es evaluado en la declaración de la función, sino en su llamada.
 
 \begin{info}{Datos especiales}
