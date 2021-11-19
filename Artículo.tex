@@ -138,6 +138,10 @@
   style=JSES6Base
 }
 
+\newenvironment{info}[1]
+  {\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{#1}}
+  {\end{bclogo}}
+
 
 \begin{document}
 \title{\Large{\textbf{Principios y Patrones de Programación Funcional}}}
@@ -175,20 +179,20 @@ Los datos primitivos son la unidad de información básica de los programas. En 
 
 \lstinputlisting[style=ES6]{code/primitives.js}
 
-\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Comentarios en el código fuente}
+\begin{info}{Comentarios en el código fuente}
 Habrás visto que en el bloque anterior hay unas barras grises \code{//} seguidas de texto. Esos son los \textit{comentarios}, texto en el código fuente que no se ejecuta y sirve para que el escritor del código le exprese al lector detalles que podrían ser pasados por alto.
 \newline
 Otra forma de escribir comentarios es delimitando texto con los símbolos \code{/*} al inicio y \code{*/} al final.
-\end{bclogo}
+\end{info}
 
 \subsection{Variables}
 Por otro lado, las variables son espacios en la memoria del programa que guardan un dato. Para indicar que se quiere crear una variable se usa la palabra clave \codejs{let} seguida del nombre de la variable. El operador de \textit{asignación} \codejs{=} indica qué valor guardar en la variable. Una variable puede ser asignada varias veces a lo largo del programa. Se puede acceder al dato guardado en una variable escribiendo el nombre de la variable.
 
 \lstinputlisting[style=ES6]{code/variables.js}
 
-\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Inspeccionar datos}
+\begin{info}{Inspeccionar datos}
 Existen varias formas para presentar los datos de los programas hacia las personas, una de ellas es mediante la \textit{consola}. Una consola sirve, entre otras cosas, para intercambiar texto entre un programa y un usuario. En JavaScript se usa la instrucción \codejs{console.log( /* dato */ )} para escribir un dato del programa en la consola. A lo largo de este documento se usará un comentario a la derecha de dicha instrucción para indicar qué texto sería escrito en la consola.
-\end{bclogo}
+\end{info}
 
 \subsection{Operadores}
 Los operadores sirven para indicar una acción relacionada al manejo de datos. Los operadores, excepto el de asignación \code{=}, generan un nuevo dato a partir de datos existentes.
@@ -275,7 +279,7 @@ Para que un ciclo no se repita infinitamente es necesario crear una variable. No
 \end{enumerate}
 Las variables que cumplen con estas características son llamadas \textit{contadores}. Este patrón es tan común común que existe un ciclo que te permite definir las tres características del contador en una sola línea: el ciclo \codejs{for}. El ejemplo anterior puede ser reescrito de la siguiente forma usando un \codejs{for}:
 \lstinputlisting[style=ES6]{code/cicles/for.js}
-\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Variables con acceso restringido}
+\begin{info}{Variables con acceso restringido}
 En realidad los dos ejemplos de código no son exactamente iguales. La diferencia no es la sintaxis, sino qué pasa con la variable \codejs{número}. En el primer ejemplo la variable fue creada antes del ciclo \codejs{while} y se puede acceder a ella al terminar el ciclo, en el segundo es creada dentro del ciclo \codejs{for} y solamente se puede acceder a ella dentro del ciclo. Este comportamiento se debe al \textit{ámbito de la variable}\cite{scope}, tema amplio que no será cubierto a detalle en este documento. En resumen: si una variable es creada usando \codejs{let}, solo se puede acceder a ella desde el bloque en el que fue creada y desde los bloques creados dentro de su mismo bloque.
 \end{bclogo}
 
@@ -290,9 +294,9 @@ Para hacer operaciones con los elementos de un arreglo es común usar ciclos don
 \subsubsection{Objetos}
 ¿Qué tal si en lugar de acceder a los elementos de una estructura de datos mediante su índice se accede mediante el nombre del elemento? Eso se puede hacer con un \textit{objeto}, un dato que guarda pares de nombre-dato (o clave-valor). A cada elemento de un objeto se le llama \textit{propiedad}. Para crear un objeto se usa un par de llaves \codejs{\{ \}} y adentro se escriben sus propiedades separadas por comas. Para acceder a una propiedad del objeto se usa el operador \textit{miembro} \codejs{.} seguido del nombre de la propiedad. Por ejemplo:
 \lstinputlisting[style=ES6]{code/data-structures/objects.js}
-\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Estructuras de datos anidadas}
+\begin{info}{Estructuras de datos anidadas}
 Los datos guardados en una estructura de datos no necesariamente deben ser primitivos, también pueden guardar otras estructuras de datos.
-\end{bclogo}
+\end{info}
 
 
 \subsection{Funciones}
@@ -304,10 +308,10 @@ Ejemplo de cómo declarar y llamar a una función que calcula el doble de un nú
 \lstinputlisting[style=ES6]{code/functions/double.js}
 Nótese que el \codejs{console.log} no es evaluado en la declaración de la función, sino en su llamada.
 
-\begin{bclogo}[logo=\bcinfo, couleurBarre=orange, noborder=true, couleur=white]{Datos especiales}
+\begin{info}{Datos especiales}
 En JavaScript existe un dato especial llamado \codejs{undefined}. Es el dato que guardan las variables a las que no se les asigna un dato, es el valor de retorno de las funciones sin \codejs{return}, es el dato que guardan los parámetros de una función invocada sin argumentos. \\
 Otro dato especial de JavaScript es \codejs{NaN}, es el resultado de intentar hacer operaciones aritméticas con datos que no pueden ser procesados. Por ejemplo, \codejs{undefined * 2} o \codejs{0 / 0} generan como resultado \codejs{NaN}.
-\end{bclogo}
+\end{info}
 
 
 \subsection{Características declarativas de JavaScript}
