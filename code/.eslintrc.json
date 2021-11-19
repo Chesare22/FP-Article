@@ -35,7 +35,7 @@
         "no-multi-spaces": "error",
         "no-whitespace-before-property": "error",
         "no-trailing-spaces":"error",
-        "operator-linebreak": [ "error", "before" ],
+        "operator-linebreak": [ "error", "before", { "overrides": { "=": "after" } } ],
         "quotes": [ "error", "double" ],
         "rest-spread-spacing": "error",
         "space-before-blocks": "error",

@@ -53,33 +53,33 @@ let map_imperative = fun => values => {
 }
 
 
-let pipe
-  = reduce( apply )
+let pipe =
+  reduce( apply )
 
-let sum_array
-  = reduce( sum )
+let sum_array =
+  reduce( sum )
 
-let sum_array1
-  = reduce1( sum )
+let sum_array1 =
+  reduce1( sum )
 
-let safe_sum_array1
-  = if_then_else( is_empty )( always( 0 ) )( reduce1( sum ) )
+let safe_sum_array1 =
+  if_then_else( is_empty )( always( 0 ) )( sum_array1 )
 
-let sum_array1_v2
-  = flip( reduce( sum ) )( 0 )
+let sum_array1_v2 =
+  flip( reduce( sum ) )( 0 )
 
 let first = ( [ a ] ) =>
   a
 
-let first_recursive
-  = reduce1( always )
+let first_recursive =
+  reduce1( always )
 
 
-let list
-  = [ 1, 2, 3, 4, 5, 6 ]
+let list =
+  [ 1, 2, 3, 4, 5, 6 ]
 
-let process
-  = pipe( [
+let process =
+  pipe( [
     sum( 2 ),
     multiply( 7 ),
   ] )
