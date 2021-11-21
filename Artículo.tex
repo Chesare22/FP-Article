@@ -327,9 +327,19 @@ Otro dato especial de JavaScript es \codejs{NaN}, es el resultado de intentar ha
 Todas las características del lenguaje abarcadas hasta el momento han sido imperativas, se especifican los pasos para llegar a un resultado. Las características declarativas de JavaScript no aportan funcionalidad que no pueda ser lograda con las características imperativas, sino que aportan sintaxis adicional para hacer ciertos bloques más legibles. En foros de Internet es común escuchar que tales características son azúcar sintáctica (\textit{syntactic sugar}). Algunas de esas características son:
 
 \subsubsection{Desestructuración}
-Sirve para crear variables que guardan los elementos de un arreglo u objeto sin usar el operador miembro. 
+Sirve para guardar, en variables, los elementos de un arreglo u objeto sin usar el operador miembro. La sintaxis para desestructurar un arreglo es similar a la de asignación, pero las variables están dentro de corchetes \codejs{[ ]} y separadas por comas. En la primera variable se va a asignar el primer elemento del arreglo, en la segunda el segundo elemento y así sucesivamente. Por ejemplo:
+\jsfile{Asignar en variables los elementos de un arreglo usando desestructuración}{code/destructing/array-using-destructing.js}
+Sin desestructuración, el ejemplo anterior se vería así:
+\jsfile{Asignar en variables los elementos de un arreglo sin desestructuración}{code/destructing/array-using-member.js}
+La desestructuración también funciona en objetos usando llaves \codejs{\{ \}} en lugar de corchetes. La diferencia es que el orden no importa, sino el nombre de la variable. Por ejemplo:
+\jsfile{Asignar en variables los elementos de un objeto usando desestructuración}{code/destructing/object-using-destructing.js}
+Sin desestructuración, el ejemplo anterior se vería así:
+\jsfile{Asignar en variables los elementos de un objeto sin desestructuración}{code/destructing/object-using-member.js}
+También puede ser usado para definir los parámetros de una función cuando no se requiere toda la estructura de datos, sino unos elementos particulares de la misma:
+\jsfile{Desestructuración en los parámetros de una función}{code/destructing/functions.js}
 
 \subsubsection{Operador resto \codejs{...}}
+
 
 \subsubsection{Funciones flecha}
 
