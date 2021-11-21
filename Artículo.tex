@@ -249,7 +249,7 @@ Un ejemplo de código que usa \codejs{else}:
 \jsfile{Ejemplos de bloques \codejs{else}}{code/conditionals/else.js}
 
 \subsection{Ciclos}
-Los ciclos son la respuesta a la pregunta ``¿Cómo se puede evaluar una instrucción múltiples veces sin tener que volver a escribirla?" Los ciclos son bloques de código similares a las condicionales porque su evaluación puede depender de un booleano. La diferencia es que los ciclos vuelven a ser evaluados si el booleano es \codejs{true}. El ciclo más básico es el bloque \codejs{while}, su sintaxis es la siguiente:
+Los ciclos son la respuesta a la pregunta ``¿Cómo se puede evaluar una instrucción múltiples veces sin tener que volver a escribirla?" \medspace Los ciclos son bloques de código similares a las condicionales porque su evaluación puede depender de un booleano. La diferencia es que los ciclos vuelven a ser evaluados si el booleano es \codejs{true}. El ciclo más básico es el bloque \codejs{while}, su sintaxis es la siguiente:
 \jsfile{Sintaxis del bloque \codejs{while}}{code/cicles/syntax-while.js}
 Por ejemplo, para escribir en la consola múltiples veces el texto \textquotedbl Around the world\textquotedbl\medspace se hace lo siguiente:
 \jsfile{Ciclo infinito usando \codejs{while}}{code/cicles/infinite-while.js}
@@ -322,6 +322,9 @@ En JavaScript existe un dato especial llamado \codejs{undefined}. Es el dato que
 Otro dato especial de JavaScript es \codejs{NaN}, es el resultado de intentar hacer operaciones aritméticas con datos que no pueden ser procesados. Por ejemplo, \codejs{undefined * 2} o \codejs{0 / 0} generan como resultado \codejs{NaN}.
 \end{info}
 
+Es posible omitir el nombre de una función, obteniendo así una \textit{función anónima} o \textit{expresión de función}, la cual es posible guardar en una variable.
+\jsfile{Funciones anónimas}{code/functions/triple.js}
+
 
 \subsection{Características declarativas de JavaScript}
 Todas las características del lenguaje abarcadas hasta el momento han sido imperativas, se especifican los pasos para llegar a un resultado. Las características declarativas de JavaScript no aportan funcionalidad que no pueda ser lograda con las características imperativas, sino que aportan sintaxis adicional para hacer ciertos bloques más legibles. En foros de Internet es común escuchar que tales características son azúcar sintáctica (\textit{syntactic sugar}). Algunas de esas características son:
@@ -335,13 +338,23 @@ La desestructuración también funciona en objetos usando llaves \codejs{\{ \}} 
 \jsfile{Asignar en variables los elementos de un objeto usando desestructuración}{code/destructing/object-using-destructing.js}
 Sin desestructuración, el ejemplo anterior se vería así:
 \jsfile{Asignar en variables los elementos de un objeto sin desestructuración}{code/destructing/object-using-member.js}
-También puede ser usado para definir los parámetros de una función cuando no se requiere toda la estructura de datos, sino unos elementos particulares de la misma:
+También puede ser usado para definir los parámetros de una función cuando no se requiere toda la estructura de datos, sino unos elementos en particular:
 \jsfile{Desestructuración en los parámetros de una función}{code/destructing/functions.js}
 
-\subsubsection{Operador resto \codejs{...}}
+\subsubsection{Operador \textit{rest} \codejs{...}}
+El operador \codejs{...} está relacionado con la desestructuración. Sirve para asignar una estructura de datos con los elementos que no fueron asignados a otras variables en la desestructuración. Funciona tanto en arreglos como en objetos. Por ejemplo:
+\jsfile{Ejemplo del operador rest}{code/destructing/rest.js}
 
+\subsubsection{Funciones flecha \codejs{=>}}
+También llamadas \textit{expresiones lambda}, son una forma de crear funciones anónimas sin usar la palabra clave \codejs{function} y el \codejs{return} está implícito si no se usan llaves. Su sintaxis consta de una flecha \codejs{=>}, a la izquierda de la flecha van los parámetros de la función y a la derecha su valor de retorno. Esta sintaxis es declarativa porque se puede interpretar como ``transformar" \medspace los parámetros en un valor de retorno.
 
-\subsubsection{Funciones flecha}
+Los paréntesis son opcionales si solo se define un parámetro sin desestructuración. Se debe escribir \codejs{return} para usar llaves y escribir un valor de retorno. Por ejemplo:
+\jsfile{Ejemplo de funciones flecha}{code/functions/arrow.js}
+
+\begin{info}{Pattern matching y expresiones lambda}
+  La desestructuración es similar a otras características presentes en lenguajes de programación funcionales, como el \textit{pattern matching} en Elixir\cite{elixir-pattern-match} y los bloques \code{case} en Elm\cite{elm-case}, pero en lenguajes funcionales esta característica puede tener múltiples casos y reemplazar algunas condicionales. \medskip \\
+  El primer lenguaje de programación con expresiones lambda fue LISP (1958) y hoy en día los lenguajes de programación funcional predominantes también cuentan con expresiones lambda. La diferencia entre las lambdas de JavaScript y las de otros lenguajes es mayormente sintáctica.
+\end{info}
 
 
 \section{Introducción a la programación funcional}
@@ -389,15 +402,27 @@ Esta sección está fuertemente inspirada por la plática ``Developer Happiness 
 
 \pagebreak
 \begin{thebibliography}{99}
-  \bibitem{compilers-and-interpreters} \href{https://youtu.be/_C5AHaS1mOA}{Boiteau, D. (Escritor), y Beecroft, S. (Director). (1983). Computer Languages (Temporada 1, Episodio 6) [Episodio de programa de televisión]. En M. McManus (Productor ejecutivo), \textit{Bits and Bytes}. TVOntario.}
-  \bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Elliot, E. (20 de febrero de 2017). \textit{Why Learn Functional Programming in JavaScript?}. Medium. https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}
-  \bibitem{scope} \href{https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope\%20\&\%20closures/README.md\#you-dont-know-js-scope--closures}{Simpson, K. (2014) \textit{You Don't Know JS: Scope \& Closures}. O'Reilly Media, Inc.}
-  \bibitem{functions} \href{https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions}{Developer.mozilla.org (15 de noviembre del 2021). \textit{Funciones - JavaScript | MDN}. https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions}
-  \bibitem{why-isnt-fp-norm} \href{https://clojutre.org/2019/#feldman}{Feldman, R. (26-27 de septiembre de 2019). \textit{Why Isn't Functional Programming the Norm?} [Sesión de conferencia]. ClojuTRE, Helsinki, Finlandia. https://clojutre.org/2019/\#feldman}
-  \bibitem{mainstream-elm} \href{https://youtu.be/oYk8CKH7OhE}{Czaplicki, E. (6-7 de junio de 2015). \textit{Let's be mainstream! User focused design in Elm} [Discurso principal]. Curry On, Praga, República Checa. https://youtu.be/oYk8CKH7OhE}
-  \bibitem{skeptics-functional-style} \href{https://youtu.be/oF9XTJoScOE}{Mills, J. (21 de julio de 2017). \textit{A Skeptics Guide To Functional Style JavaScript} [Sesión de conferencia]. NEJS CONF, Omaha, Nebraska, Estados Unidos de América. https://youtu.be/oF9XTJoScOE}
-  \bibitem{functional-architecture} \href{https://youtu.be/US8QG9I1XW0}{Seemann, M. (2016). \textit{Functional architecture – The pits of success} [Sesión de conferencia]. NDC Conferences, Sídney, Australia. https://youtu.be/US8QG9I1XW0}
-  \bibitem{developer-happiness-elm} \href{https://youtu.be/kuOCx0QeQ5c}{Yank, K. (25 de mayo de 2017). \textit{Developer Happiness on the Front End with Elm} [Vídeo]. https://youtu.be/kuOCx0QeQ5c}
+\bibitem{compilers-and-interpreters} \href{https://youtu.be/_C5AHaS1mOA}{Boiteau, D. (Escritor), y Beecroft, S. (Director). (1983). Computer Languages (Temporada 1, Episodio 6) [Episodio de programa de televisión]. En M. McManus (Productor ejecutivo), \textit{Bits and Bytes}. TVOntario.}
+
+\bibitem{why-js} \href{https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}{Elliot, E. (20 de febrero de 2017). \textit{Why Learn Functional Programming in JavaScript?}. Medium. https://medium.com/javascript-scene/why-learn-functional-programming-in-javascript-composing-software-ea13afc7a257}
+
+\bibitem{scope} \href{https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/scope\%20\&\%20closures/README.md\#you-dont-know-js-scope--closures}{Simpson, K. (2014) \textit{You Don't Know JS: Scope \& Closures}. O'Reilly Media, Inc.}
+
+\bibitem{functions} \href{https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions}{Developer.mozilla.org (15 de noviembre del 2021). \textit{Funciones - JavaScript | MDN}. https://developer.mozilla.org/es/docs/Web/JavaScript/Guide/Functions}
+
+\bibitem{elixir-pattern-match} \href{https://elixir-lang.org/getting-started/pattern-matching.html}{The Elixir Team. (2012-2021). \textit{Pattern matching - The Elixir programming language}. https://elixir-lang.org/getting-started/pattern-matching.html}
+
+\bibitem{elm-case} \href{https://elmprogramming.com/case-expression.html}{Poudel, P. (2018). \textit{Case Expression - Beginning Elm}. https://elmprogramming.com/case-expression.html}
+
+\bibitem{why-isnt-fp-norm} \href{https://clojutre.org/2019/#feldman}{Feldman, R. (26-27 de septiembre de 2019). \textit{Why Isn't Functional Programming the Norm?} [Sesión de conferencia]. ClojuTRE, Helsinki, Finlandia. https://clojutre.org/2019/\#feldman}
+
+\bibitem{mainstream-elm} \href{https://youtu.be/oYk8CKH7OhE}{Czaplicki, E. (6-7 de junio de 2015). \textit{Let's be mainstream! User focused design in Elm} [Discurso principal]. Curry On, Praga, República Checa. https://youtu.be/oYk8CKH7OhE}
+
+\bibitem{skeptics-functional-style} \href{https://youtu.be/oF9XTJoScOE}{Mills, J. (21 de julio de 2017). \textit{A Skeptics Guide To Functional Style JavaScript} [Sesión de conferencia]. NEJS CONF, Omaha, Nebraska, Estados Unidos de América. https://youtu.be/oF9XTJoScOE}
+
+\bibitem{functional-architecture} \href{https://youtu.be/US8QG9I1XW0}{Seemann, M. (2016). \textit{Functional architecture – The pits of success} [Sesión de conferencia]. NDC Conferences, Sídney, Australia. https://youtu.be/US8QG9I1XW0}
+
+\bibitem{developer-happiness-elm} \href{https://youtu.be/kuOCx0QeQ5c}{Yank, K. (25 de mayo de 2017). \textit{Developer Happiness on the Front End with Elm} [Vídeo]. https://youtu.be/kuOCx0QeQ5c}
 \end{thebibliography}
 
 \end{document}

@@ -47,7 +47,13 @@
         "prefer-rest-params": "error",
         "prefer-spread": "error",
         "spaced-comment": "error",
-        "comma-dangle": [ "error", "always-multiline" ],
+        "comma-dangle": [ "error", {
+            "arrays": "always-multiline",
+            "objects": "always-multiline",
+            "imports": "always-multiline",
+            "exports": "always-multiline",
+            "functions": "never"
+        } ],
         "quote-props": [ "error", "as-needed" ],
 
         // Prevent errors

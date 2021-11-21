@@ -3,7 +3,6 @@ let sandra = {
   apellido: "Mex",
   trabajo: "Doctora",
 }
-
 function nombre_completo( { nombre, apellido } ) {
   return nombre + " " + apellido
 }
